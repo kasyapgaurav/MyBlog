@@ -1,0 +1,30 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="StudentController">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+
+    <aura:attribute name="CsvList" type="List" />
+    <aura:attribute name="totalRecordCount" type="Integer"/> 
+    <aura:attribute name="startPos" type="Integer"/>
+    <aura:attribute name="endPos" type="Integer"/>
+
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+        <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+        </div>
+    </aura:if>
+
+    <div class="slds-page-header">
+        <div class="slds-align_absolute-center" style="display: grid;">
+            <div> Click here to download all student records. </div>
+            <lightning:button variant="brand" label="Download" title="Download" onclick="{! c.handleDownload }" />
+        </div>
+    </div>
+</aura:component>
